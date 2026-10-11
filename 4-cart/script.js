@@ -31,16 +31,22 @@ function renderProducts() {
 }
 
 function addToCart(id) {
-  const product = products.find((p) => p.id === id);
-  if (!product) {
-    return;
+  const productInCart = cart.find((p) => p.id === id);
+  if (productInCart) {
+    productInCart.qty += 1;
+  } else {
+    const product = products.find((p) => p.id === id);
+    if (!product) {
+      return;
+    }
+    cart.push({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      qty: 1,
+    });
   }
-  cart.push({
-    id: product.id,
-    name: product.name,
-    price: product.price,
-    qty: 1,
-  });
+
   renderCart();
 }
 
