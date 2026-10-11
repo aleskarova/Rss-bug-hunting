@@ -112,7 +112,9 @@ function renderCart() {
     total = total - total * discount;
   }
 
-  badgeEl.textContent = cart.length;
+  badgeEl.textContent = cart
+    .map((item) => item.qty)
+    .reduce((acc, curr) => acc + curr, 0);
   totalEl.textContent = total;
   emptyMsg.hidden = true;
 }
